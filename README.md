@@ -9,4 +9,4 @@ The main objectives of this laboratory are:
 - Set up a cloud infrastructure using Terraform and DigitalOcean.
 - Deploy and manage a Kubernetes cluster in the cloud.
 - Configure and use ArgoCD for continuous deployment.
-- Automate the deployment process with GitHub Actions.
+- Automate the deployment process with GitHub Actions.# tf-gha-k8s-do-lab
