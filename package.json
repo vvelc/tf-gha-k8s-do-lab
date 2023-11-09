@@ -1,0 +1,19 @@
+{
+  "name": "tf-gha-k8s-do-test-lab",
+  "version": "1.0.0",
+  "description": "Welcome to this DevOps Practice Lab, where you will see the DevOps knowledge that I have learned so far put into practice, such as how to configure and manage cloud infrastructure, deploy a Kubernetes cluster, automate deployments with ArgoCD and GitHub Actions, and much more",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "infisical run --env=dev -- nodemon src/index.js -L",
+    "start:prod": "infisical run --env=dev -- nodemon src/index.js -L"
+  },
+  "author": "vvelc",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
