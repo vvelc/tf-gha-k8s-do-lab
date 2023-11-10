@@ -24,7 +24,14 @@ jobs:
     steps:
       - name: Semver Release
         uses: K-Phoen/semver-release-action@v1.3.2
-        
+        with:
+          release_branch: master
+          release_strategy: none
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - run: echo {{steps.get_semver.output.tag}}
+      - run: exit 0
   # push_to_dockerhub:
   #   name: Push Docker image to Docker Hub
   #   runs-on: ubuntu-latest
