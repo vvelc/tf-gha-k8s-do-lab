@@ -30,7 +30,7 @@ jobs:
         uses: K-Phoen/semver-release-action@v1.3.2
         with:
           release_branch: prod
-          release_strategy: release
+          release_strategy: tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
