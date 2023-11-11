@@ -1,68 +1,18 @@
----
-  name: 'Release'
-  
-  on:
-    workflow_dispatch:
-      inputs:
-        semver:
-          description: 'Which version you want to increment? Use MAJOR, MINOR or PATCH'
-          required: true
-          default: 'PATCH'
-        label:
-          description: 'Add Labels. i.e final, alpha, rc'
-          required: false
-          default: ''
-  
-  jobs:
-    release:
-      name: 'Release'
-      runs-on: 'ubuntu-latest'
-  
-      steps:
-        # Checkout sources
-        - name: 'Checkout'
-          uses: actions/checkout@v2
-  
-        # ...
-        - name: '👷‍♂️ Build'
-          run: |
-            echo "BUILD COMPLETE 👍"
-  
-        # ...
-        - name: '🧪 TEST'
-          run: |
-            echo "TESTS PASSED 🎉"
+# .github/workflows/release.yml
+name: Release
 
-        - uses: rui-costa/action-automatic-semver-releases
-          with:
-            TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-            SEMVER: '${{ github.event.inputs.semver }}'
-            LABEL: '${{ github.event.inputs.label }}'
+on:
+  pull_request:
+    types: [closed]
 
-  # push_to_dockerhub:
-  #   name: Push Docker image to Docker Hub
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Check out the repo
-  #       uses: actions/checkout@v3
-      
-  #     - name: Log in to Docker Hub
-  #       uses: docker/login-action
-  #       with:
-  #         username: ${{ secrets.DOCKER_USERNAME }}
-  #         password: ${{ secrets.DOCKER_PASSWORD }}
-      
-  #     - name: Extract metadata (tags, labels) for Docker
-  #       id: meta
-  #       uses: docker/metadata-action
-  #       with:
-  #         images: my-docker-hub-namespace/my-docker-hub-repository
-      
-  #     - name: Build and push Docker image
-  #       uses: docker/build-push-action
-  #       with:
-  #         context: .
-  #         push: true
-  #         tags: ${{ steps.meta.outputs.tags }}
-  #         labels: ${{ steps.meta.outputs.labels }}
-      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Tag
+        uses: K-Phoen/semver-release-action@master
+        with:
+          release_branch: master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
