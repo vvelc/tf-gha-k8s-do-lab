@@ -33,7 +33,7 @@
           run: |
             echo "TESTS PASSED 🎉"
 
-        - uses: 'rui-costa/action-automatic-semver-releases'
+        - uses: rui-costa/action-automatic-semver-releases
           with:
             TOKEN: '${{ secrets.GITHUB_TOKEN }}'
             SEMVER: '${{ github.event.inputs.semver }}'
