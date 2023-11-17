@@ -6,7 +6,7 @@ Welcome to this DevOps Practice Lab, where you will see the DevOps knowledge tha
 
 The main objectives of this laboratory are:
 
-- Set up a cloud infrastructure using Terraform and DigitalOcean.
+- Set up a cloud infrastructure using Terraform and Google Cloud Platform.
 - Deploy and manage a Kubernetes cluster in the cloud.
 - Configure and use ArgoCD for continuous deployment.
 - Automate the deployment process with GitHub Actions.
