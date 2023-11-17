@@ -9,7 +9,7 @@ env:
     GCP_PROJECT_ID: 'tf-gha-k8s-gcp-test-lab'
     GCP_PROJECT_NUMBER: '278154893338'
     GAR_LOCATION: us-central1
-    GAR_REPOSITORY: containers
+    GAR_REPOSITORY: apps
     #TF_STATE_BUCKET_NAME: ''
     IMAGE_NAME: 'hello-app'
 
@@ -31,7 +31,7 @@ jobs:
               with:
                 #token_format: 'access_token'
                 workload_identity_provider: 'projects/$GCP_PROJECT_NUMBER/locations/global/workloadIdentityPools/k8s-pool/providers/k8s-provider'
-                service_account: 'kubernetes@tf-gha-k8s-gcp-test-lab.iam.gserviceaccount.com'
+                service_account: 'iam-service-account@tf-gha-k8s-gcp-test-lab.iam.gserviceaccount.com'
 
             - name: Setup Google Cloud
               uses: 'google-github-actions/setup-gcloud@v1'
