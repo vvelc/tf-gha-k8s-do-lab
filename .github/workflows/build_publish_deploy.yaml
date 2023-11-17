@@ -69,7 +69,8 @@ jobs:
             - name: Terraform Plan
               run: |
                 terraform plan \
-                -var="container_image=$GAR_LOCATION-docker.pkg.dev/$GCP_PROJECT_ID/$GAR_REPOSITORY/$IMAGE_NAME:$IMAGE_TAG"
+                -var="container_image=$GAR_LOCATION-docker.pkg.dev/$GCP_PROJECT_ID/$GAR_REPOSITORY/$IMAGE_NAME:$IMAGE_TAG" \
+                -var="project_id=$GCP_PROJECT_ID" \
                 -out=PLAN
               working-directory: ./terraform
               # TODO: change this to use Makefilew with Infisical for prod env
