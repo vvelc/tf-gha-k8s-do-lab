@@ -1,0 +1,62 @@
+name: Build, Publish and Deploy to GKE
+
+on:
+    push:
+        branches:
+            - main
+
+env:
+    GCP_PROJECT_ID: 'tf-gha-k8s-gcp-test-lab'
+    GCP_PROJECT_NUMBER: '278154893338'
+    #TF_STATE_BUCKET_NAME: ''
+    IMAGE_NAME: 'hello-app'
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        env: 
+            IMAGE_TAG: ${{ github.sha }}
+        permissions: 
+            contents: 'read'
+            id-token: 'write'
+        steps:
+            - name: Checkout Repo
+              uses: 'actions/checkout@v4'
+            
+            - id: 'auth'
+              name: 'Authenticate to Google Cloud'
+              uses: 'google-github-actions/auth@v1'
+              with:
+                token_format: 'access_token'
+                workload_identity_provider: 'projects/$GCP_PROJECT_NUMBER/locations/global/workloadIdentityPools/k8s-pool/providers/k8s-provider'
+                service_account: 'kubernetes@tf-gha-k8s-gcp-test-lab.iam.gserviceaccount.com'
+
+            - name: Setup Google Cloud
+              uses: 'google-github-actions/setup-gcloud@v1'
+
+            - name: Docker Registry Auth
+              run: gcloud auth configure-docker
+
+            - name: Build and Push Docker Image
+              run: |
+                docker build -t us.gcr.io/$GCP_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG .
+                docker push us.gcr.io/$GCP_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+              working-directory: ./app
+
+            - name: Setup Terraform
+              uses: 'hashicorp/setup-terraform@v2'
+            
+            - name: Terraform init
+              run: terraform init # TODO: change this to use Makefilew with Infisical for prod env
+              working-directory: ./terraform
+
+            - name: Terraform Plan
+              run: |
+                terraform plan \
+                -var="container_image=us.gcr.io/$GCP_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG"
+                -out=PLAN
+              # TODO: change this to use Makefilew with Infisical for prod env
+              # TODO: Change Terraform files to use variables instead of hard coded values
+
+            - name: Terraform Apply
+              run: terraform apply PLAN
