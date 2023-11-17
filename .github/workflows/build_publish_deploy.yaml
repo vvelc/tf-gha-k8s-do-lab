@@ -59,6 +59,7 @@ jobs:
 
             - name: Setup Terraform
               uses: 'hashicorp/setup-terraform@v2'
+                terraform_wrapper: false
             
             - name: Terraform init
               run: terraform init # TODO: change this to use Makefilew with Infisical for prod env
