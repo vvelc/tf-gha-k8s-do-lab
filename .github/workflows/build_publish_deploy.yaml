@@ -69,7 +69,7 @@ jobs:
                 terraform plan \
                 -var="container_image=$GAR_LOCATION-docker.pkg.dev/$GCP_PROJECT_ID/$GAR_REPOSITORY/$IMAGE_NAME:$IMAGE_TAG"
                 -out=PLAN
-              working-directory: ./terraformz
+              working-directory: ./terraform
               # TODO: change this to use Makefilew with Infisical for prod env
               # TODO: Change Terraform files to use variables instead of hard coded values
 
