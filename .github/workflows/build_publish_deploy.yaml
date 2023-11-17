@@ -29,7 +29,7 @@ jobs:
               name: 'Authenticate to Google Cloud'
               uses: 'google-github-actions/auth@v1'
               with:
-                #token_format: 'access_token'
+                token_format: 'access_token'
                 workload_identity_provider: 'projects/$GCP_PROJECT_NUMBER/locations/global/workloadIdentityPools/k8s-pool/providers/k8s-provider'
                 service_account: 'iam-service-account@tf-gha-k8s-gcp-test-lab.iam.gserviceaccount.com'
 
