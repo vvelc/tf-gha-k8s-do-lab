@@ -18,7 +18,7 @@ provider "kubernetes" {
 
 terraform {
     backend "gcs" {
-      bucket = "victor-tf-state-staging"
+      bucket = "victor-tf-state-prod"
       prefix = "terraform/state"
     }
   required_providers {
