@@ -8,8 +8,8 @@ resource "google_project_iam_member" "service_a" {
   member = "serviceAccount:${google_service_account.kubernetes.email}"
 }
 
-resource "google_service_account_iam_member" "service_a" {
-  service_account_id = google_service_account.kubernetes.id
-  role = "roles/iam.workloadIdentityUser"
-  member = "serviceAccount:${var.project_id}.svc.id.goog[staging-service-a]"
-}
+# resource "google_service_account_iam_member" "service_a" {
+#   service_account_id = google_service_account.kubernetes.id
+#   role = "roles/iam.workloadIdentityUser"
+#   member = "serviceAccount:${var.project_id}.svc.id.goog[staging-service-a]"
+# }
