@@ -1,5 +1,5 @@
 resource "google_service_account" "kubernetes" {
-  account_id = "kubernetes"
+  account_id = "iam-service-account"
 }
 
 resource "google_container_node_pool" "general" {
