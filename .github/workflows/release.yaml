@@ -11,11 +11,14 @@ jobs:
     outputs:
       tag: ${{ steps.tag.outputs.tag }}
     steps:
+      - name: Checkout Repo
+        uses: 'actions/checkout@v4'
+
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
         with:
-         path: app
+         path: ./app
 
       - name: Create Tag
         id: tag
