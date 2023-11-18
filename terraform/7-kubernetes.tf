@@ -42,3 +42,8 @@ resource "google_container_cluster" "primary" {
     master_ipv4_cidr_block = "172.16.0.0/28"
   }  
 }
+
+# data "google_container_cluster" "primary" {
+#   name     = "primary"
+#   location = "us-central1-a"
+# }
