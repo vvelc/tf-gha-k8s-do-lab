@@ -3,7 +3,7 @@ name: Build and Deploy to GKE
 on:
   pull_request:
     branches:
-      - main
+      - disable
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
