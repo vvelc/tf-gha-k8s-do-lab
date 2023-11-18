@@ -8,5 +8,4 @@ The main objectives of this laboratory are:
 
 - Set up a cloud infrastructure using Terraform and Google Cloud Platform.
 - Deploy and manage a Kubernetes cluster in the cloud.
-- Configure and use ArgoCD for continuous deployment.
 - Automate the deployment process with GitHub Actions.
