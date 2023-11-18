@@ -4,7 +4,7 @@ resource "kubernetes_deployment_v1" "hello_app" {
   }
 
   spec {
-    replicas = 3
+    replicas = 2
     selector {
       match_labels = {
         role = "hello-v1"
@@ -25,6 +25,7 @@ resource "kubernetes_deployment_v1" "hello_app" {
         container {
           name  = "hello-v1"
           image = var.container_image
+          image_pull_policy = "Always"
           port {
             container_port = 8080
           }
